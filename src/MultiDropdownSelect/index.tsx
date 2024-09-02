@@ -81,16 +81,19 @@ const MultiDropdownSelect = ({
       if ((e.key === "Enter" || e.keyCode === 13) && inputValue !== undefined) {
         e.preventDefault();
 
-        // add entered input value to options
-        setOptionsState((prevOptionStates) => [
-          inputValue,
-          ...prevOptionStates,
-        ]);
+        if (!!inputValue) {
+          // add entered input value to options
+          setOptionsState((prevOptionStates) => [
+            inputValue,
+            ...prevOptionStates,
+          ]);
 
-        // add new entry to selected options
-        handleSelect(inputValue);
-        setInputValue("");
-        onOptionsUpdate && onOptionsUpdate(optionsState);
+          // add new entry to selected options
+          handleSelect(inputValue);
+
+          setInputValue("");
+          onOptionsUpdate && onOptionsUpdate(optionsState);
+        }
       }
     },
     // format values to help search
